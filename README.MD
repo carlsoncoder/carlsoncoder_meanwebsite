@@ -31,7 +31,7 @@ If you choose to clone this repository and use it to start making your own blog 
 + There are a few places that have hard-coded references to "carlsoncoder.com".  You will likely want to remove those and implement your own logic.
 + Likewise, I also have some hard-coded links to my GitHub, LinkedIn, Twitter, and email at various places in the code.
 + I intentionally excluded a critical file from this repository.  You will need to add a file to the "config" directory, called "config.js".  In there, you need to define a JSON object and export it, like such:
-    +  ```
+```
 var options = {
             DISQUS_SHORT_NAME :             "",
             JWT_SECRET_KEY :                "",
