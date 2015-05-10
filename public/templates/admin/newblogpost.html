@@ -1,0 +1,25 @@
+<div data-ng-show="error" class="alert alert-danger row">
+    <span>{{ error }}</span>
+</div>
+
+<form data-ng-submit="validateNewPost()" style="margin-top:30px;">
+    <div class="form-group">
+        <p>Blog Title:</p>
+        <input type="text" class="form-control" placeholder="Blog Title" data-ng-model="newBlogPost.title" />
+        <br />
+    </div>
+
+    <textarea ui-tinymce="tinymceOptions" id="blogHtmlContent" ng-model="newBlogPost.htmlContent"></textarea>
+
+    <br />
+
+    <div class="form-group">
+        <p>Blog Tags (separate with | character):</p>
+        <input type="text" class="form-control" placeholder="Tags" data-ng-model="newBlogPost.tagString" />
+        <br />
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-primary">Preview Post</button>
+</form>
+
+<div script-loader pagename="admin"></div>

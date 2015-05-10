@@ -1,0 +1,32 @@
+<div class="alert alert-danger row">
+    <p class="warningParagraph">THIS IS ONLY A PREVIEW OF A BLOG POST - YOU MUST CLICK 'SAVE POST' AT THE BOTTOM FOR IT TO BE SAVED!!!</p>
+</div>
+
+<div class="blogEntryDiv">
+    <h2 class="singleBlogTitle">{{newBlogPost.title | decodeBlogTitle}}</h2>
+    <br />
+
+    <table class="dateTable">
+        <tr>
+            <td width="4%"><img src="img/calendar_icon.png" /></td>
+            <td width="70%">{{currentDate | date:'MMMM dd, yyyy' | uppercase}}</td>
+        </tr>
+    </table>
+
+    <div class="mainBlogContent" ng-bind-html="newBlogPost.htmlContent | to_trusted_html"></div>
+    <br />
+
+    <div id="tagsDiv">
+        <a class="blogTag" ng-repeat="tag in newBlogPost.tags">{{tag | lowercase}}</a>
+    </div>
+
+    <br />
+    <a id="backToBlogsLink">Back to blogs</a>
+</div>
+<br />
+
+<button class="btn btn-lg btn-primary addRightMargin" ng-click="saveBlogPost()">Save Post</button>
+<button class="btn btn-lg btn-primary" ng-click="returnToEditing()">Return To Editing</button>
+<br />
+
+<div script-loader pagename="admin"></div>

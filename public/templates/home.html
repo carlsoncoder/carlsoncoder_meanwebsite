@@ -1,0 +1,26 @@
+<div class="blogEntryDiv" ng-repeat="post in posts | orderBy: '-whenCreated'" ng-show="shouldShowPost(post)">
+    <table class="mainHeaderTable">
+        <tr>
+            <td width="75%"><a class="blogTitleLink" ui-sref="specificBlogPost({fullLinkPath: post.linkPath })"><p class="blogTitle">{{post.title | decodeBlogTitle}}</p></a></td>
+            <td width="25%"><a class="disqusCommentCount" data-disqus-identifier="{{post.uniqueIdentifier}}" href="http://www.carlsoncoder.com/#/blog/{{post.linkPath}}"></a></td>
+        </tr>
+    </table>
+    <table class="dateTable">
+        <tr>
+            <td width="4%"><img src="img/calendar_icon.png" /></td>
+            <td width="70%">{{post.whenCreated | date:'MMMM dd, yyyy' | uppercase}}</td>
+        </tr>
+    </table>
+
+    <br />
+    <div class="mainBlogContent" ng-bind-html="post.htmlContent | shortenBlogPost:post.linkPath | to_trusted_html"></div>
+</div>
+
+<div class="blogNavigationButtonContainer">
+    <button class="btn btn-lg btn-default navigationButton" ng-click="loadOlderBlogs()" ng-show="showOlderPostsLink">Older Blogs</button>
+    <button class="btn btn-lg btn-default navigationButton" ng-click="loadNewerBlogs()" ng-show="showNewerPostsLink">Newer Blogs</button>
+</div>
+<br />
+
+<div script-loader pagename="home"></div>
+<blog-filter-watcher></blog-filter-watcher>

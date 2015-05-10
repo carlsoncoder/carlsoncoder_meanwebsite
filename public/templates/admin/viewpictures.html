@@ -1,0 +1,45 @@
+<h3>All Images</h3>
+
+<div id="picturesContainer">
+    <div ng-repeat="image in allImages">
+        <a
+                replace-anchor-title
+                data-desiredtitle="{{image.description}}"
+                ng-href="{{image.url}}"
+                class="ilightbox"
+                data-title="{{image.caption}}"
+                data-caption="{{image.description}}"
+                data-full-width="{{image.width}}"
+                data-full-height="{{image.height}}" >
+            <img
+                    id="{{image.thumbnailUrl}}"
+                    class="scalableThumbnail"
+                    data-thumb-width="{{image.thumbnailWidth}}"
+                    data-thumb-height="{{image.thumbnailHeight}}"
+                    style="display:inline;"
+                    ng-src="{{image.thumbnailUrl}}" />
+        </a>
+        <xmp class="formattedImageHtmlSource">
+                    <a
+                            replace-anchor-title
+                            data-desiredtitle="{{image.description}}"
+                            href="{{image.url}}"
+                            class="ilightbox"
+                            data-title="{{image.caption}}"
+                            data-caption="{{image.description}}"
+                            data-full-width="{{image.width}}"
+                            data-full-height="{{image.height}}" >
+                        <img
+                                id="{{image.thumbnailUrl}}"
+                                class="scalableThumbnail"
+                                data-thumb-width="{{image.thumbnailWidth}}"
+                                data-thumb-height="{{image.thumbnailHeight}}"
+                                style="display:inline;"
+                                src="{{image.thumbnailUrl}}" />
+                    </a>
+        </xmp>
+    </div>
+</div>
+<br />
+
+<div script-loader pagename="admin"></div>

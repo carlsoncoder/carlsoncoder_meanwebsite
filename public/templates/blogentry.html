@@ -1,0 +1,39 @@
+<div ng-show="isLoggedIn()" >
+    <button class="btn btn-lg btn-primary floatRight" ng-click="editBlogPost()">Edit Blog Post</button>
+    <br />
+</div>
+
+<div class="blogEntryDiv">
+    <h2 class="singleBlogTitle">{{currentBlogPost.title | decodeBlogTitle}}</h2>
+    <br />
+
+    <table class="dateTable">
+        <tr>
+            <td width="4%"><img src="img/calendar_icon.png" /></td>
+            <td width="70%">{{currentBlogPost.whenCreated | date:'MMMM dd, yyyy' | uppercase}}</td>
+        </tr>
+    </table>
+
+    <p class="lastUpdatedParagraph" ng-show="currentBlogPost.lastUpdated"><em>Last Updated On: {{currentBlogPost.lastUpdated | date:'MMMM dd, yyyy'}}</em></p>
+    <div class="mainBlogContent" ng-bind-html="currentBlogPost.htmlContent | to_trusted_html"></div>
+    <br />
+
+    <div id="tagsDiv">
+        <a class="blogTag" ui-sref="archivesSearch({tagName: (tag | encodeBlogTitle | lowercase)})" ng-repeat="tag in currentBlogPost.tags" title="Search for posts tagged with '{{tag | lowercase}}'">{{tag | lowercase}}</a>
+    </div>
+
+    <br />
+    <a id="backToBlogsLink" ui-sref="home">Back to blogs</a>
+
+    <br />
+    <br />
+    <div id="disqus_thread"></div>
+</div>
+
+<div
+        script-loader
+        pagename="blogentry"
+        blog-identifier="{{currentBlogPost.uniqueIdentifier}}"
+        blog-title="{{currentBlogPost.title}}"
+        blog-url="http://www.carlsoncoder.com/#/blog/{{currentBlogPost.linkPath}}">
+</div>

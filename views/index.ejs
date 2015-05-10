@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Carlson Coder</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="keywords" content="Carlson, CarlsonCoder, Software, Development, Coder" />
+        <meta name="description" content="CarlsonCoders home page" />
+
+        <link rel="stylesheet" type="text/css" href="css/carlsoncoder.css" />
+
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" type="text/css" href="iLightBox/css/ilightbox.css" />
+
+        <!-- SyntaxHighlighter -->
+        <link rel="stylesheet" type="text/css" href="SyntaxHighlighter/styles/shCoreRDark.css" />
+        <link rel="stylesheet" type="text/css" href="SyntaxHighlighter/styles/shThemeRDark.css" />
+
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="iLightBox/js/ilightbox.min.js"></script>
+        <script type="text/javascript" src="iLightBox/js/ilightbox.packed.js"></script>
+        <script type="text/javascript" src="iLightBox/js/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="iLightBox/js/jquery.requestAnimationFrame.js"></script>
+
+        <!-- AngularJS -->
+        <script type="text/javascript" src="js/carlsoncoder-angularApp.js"></script>
+        <script type="text/javascript" src="js/carlsoncoder-controllers.js"></script>
+        <script type="text/javascript" src="js/carlsoncoder-directives.js"></script>
+        <script type="text/javascript" src="js/carlsoncoder-filters.js"></script>
+        <script type="text/javascript" src="js/carlsoncoder-factories.js"></script>
+        <script type="text/javascript" src="js/carlsoncoder-injectors.js"></script>
+        <script type="text/javascript" src="js/carlsoncoder-scripts.js"></script>
+
+        <script type="text/javascript" src="bower_components/tinymce/tinymce.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+
+        <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+        <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+
+        <!-- SyntaxHighlighter -->
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shCore.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushBash.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushCSharp.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushCpp.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushCss.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushJScript.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushJava.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushPython.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushSql.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushXml.js"></script>
+        <script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushPowerShell.js"></script>
+
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            // initialize the ga_account_id variable (we set this on the server side with the EJS templating)
+            var ga_account_id = "<%= config_ga_account_id %>";
+            ga('create', ga_account_id, 'auto');
+            ga('send', 'pageview');
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $(window).bind('resizeCompleted', function () {
+                    resizeImages();
+                });
+
+                $(window).resize(function () {
+                    if (this.resizeTimer) {
+                        clearTimeout(this.resizeTimer);
+                    }
+
+                    this.resizeTimer = setTimeout(function () {
+                        $(this).trigger('resizeCompleted');
+                    }, 300);
+                });
+
+                // initialize the disqus_shortname variable (we set this on the server side with the EJS templating)
+                disqus_shortname = "<%= config_disqus_shortname %>";
+
+                // load disqus script for embedding
+                $.getScript('http://' + disqus_shortname + '.disqus.com/embed.js');
+            });
+        </script>
+    </head>
+
+    <body ng-app="carlsonCoder">
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" ng-controller="NavigationController">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a id="siteSectionTitle" class="navbar-brand">CarlsonCoder's Blog</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li id="homeSectionLink" class="sectionLink"><a ui-sref="home">HOME</a></li>
+                        <li id="aboutSectionLink" class="sectionLink" ><a ui-sref="about" >ABOUT</a></li>
+                        <li id="coolsitesSectionLink" class="sectionLink"><a ui-sref="coolsites" >COOL SITES</a></li>
+                        <li id="archivesSectionLink" class="sectionLink"><a ui-sref="archives">ARCHIVES</a></li>
+                        <li id="adminSectionLink" class="sectionLink" ng-show="isLoggedIn()"><a ui-sref="admin">ADMIN</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="font-size:1.3em;">CONTACT <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="mailto:justin@carlsoncoder.com" title="Email - justin@carlsoncoder.com" >
+                                        <img src="img/email_icon.png" width="42" height="42" />&nbsp;&nbsp;EMAIL
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="https://www.linkedin.com/pub/justin-carlson/47/726/459" title="LinkedIn - Justin Carlson" target="_blank">
+                                        <img src="img/linkedin_icon.png" width="42" height="42" />&nbsp;&nbsp;LINKEDIN
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a id="logoutAnchor" href="" title="Log Out" ng-show="isLoggedIn()" ng-click="logOut()">Log Out</a></li>
+                        <li><a id="loginAnchor" ui-sref="login" title="Log In" ng-show="!isLoggedIn()">Log In</a></li>
+                        <li>
+                            <a id="twitterAnchor" href="https://twitter.com/carlsoncoder" title="Twitter - @carlsoncoder" target="_blank">
+                                <img class="contactImage" src="img/twitter_icon.png" width="40" height="40" />
+                            </a>
+                        </li>
+                        <li>
+                            <a id="githubAnchor" href="https://github.com/carlsoncoder/" title="GitHub - @carlsoncoder" target="_blank">
+                                <img src="img/github_icon.png" width="40" height="40" />
+                            </a>
+                        </li>
+                        <li><a id="rssFeedAnchor" href="/feed.xml" target="_blank" title="RSS Feed"><img src="img/rss_feed_icon.png" width="40" height="40"/></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="faded" loading-spinner>
+            <div class="fadedOverlay">
+                <img class="loadingGif" src="img/loadingGears.gif" />
+                <p class="loadingTextParagraph">{{$root.loadingText}}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="contentBox" class="col-lg-10 col-lg-offset-1 bootstrapContentDiv">
+                <br />
+                <ui-view></ui-view>
+                <br />
+            </div>
+        </div>
+
+    </body>
+
+    <footer>
+        <p><b>Copyright © 2015 - Justin Carlson</b></p>
+    </footer>
+</html>

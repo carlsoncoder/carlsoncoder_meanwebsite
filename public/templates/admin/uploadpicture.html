@@ -1,0 +1,31 @@
+<div data-ng-show="error" class="alert alert-danger row">
+    <span>{{ error }}</span>
+</div>
+
+<div>
+    <p ng-show="files && files.length">{{files[0].name}}</p>
+    <p ng-show="!files">No File Selected</p>
+    <button class="btn" ngf-select ng-model="files">Select File</button>
+</div>
+
+<div class="form-group">
+    <span>Name:</span>
+    <input type="text" class="form-control" placeholder="Name" ng-model="imageDetails.name" />
+</div>
+<div class="form-group">
+    <span>Caption:</span>
+    <input type="text" class="form-control" placeholder="Caption" ng-model="imageDetails.caption" />
+</div>
+<div class="form-group">
+    <span>Description:</span>
+    <input type="text" class="form-control" placeholder="Description" ng-model="imageDetails.description" />
+</div>
+<div class="form-group">
+    <span>Divisor:</span>
+    <input type="text" class="form-control" placeholder="Divisor" ng-model="imageDetails.divisor" />
+</div>
+
+<br />
+<button class="btn btn-lg btn-primary" ng-click="uploadPicture()">Upload Picture</button>
+
+<div script-loader pagename="admin"></div>

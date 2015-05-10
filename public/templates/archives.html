@@ -1,0 +1,20 @@
+<div ng-repeat="month in blogArchives" ng-show="showAllArchives">
+    <p class="largeParagraphBold">{{month.displayMonth}}</p>
+    <div ng-repeat="archive in month.thisMonthsArchives">
+        <a class="archiveLink" ui-sref="specificBlogPost({fullLinkPath: archive.linkPath })">{{archive.title | decodeBlogTitle}} - ({{archive.whenCreated | date:'MMMM dd, yyyy'}})</a>
+    </div>
+</div>
+
+<div ng-show="taggedBlogs.length === 0 && !showAllArchives">
+    <p>Did not find any blog posts tagged with '{{tagName}}'</p>
+</div>
+
+<div ng-show="taggedBlogs.length > 0 && !showAllArchives">
+    <p>Blog posts tagged with '{{tagName}}'</p>
+</div>
+
+<div ng-repeat="archive in taggedBlogs" ng-hide="showAllArchives">
+    <a class="archiveLink" ui-sref="specificBlogPost({fullLinkPath: archive.linkPath })">{{archive.title | decodeBlogTitle}} - ({{archive.whenCreated | date:'MMMM dd, yyyy'}})</a>
+</div>
+
+<div script-loader pagename="archives"></div>

@@ -1,0 +1,9 @@
+<br />
+<table class="table table-hover table-striped">
+    <tr class="clickableRowWithLink" ng-repeat="site in coolsites" data-link-url="{{site.link}}">
+        <td class="siteLinkName"><a href="{{site.link}}" target="_blank">{{site.name}}</a></td>
+        <td class="siteLinkDescription">{{site.description}}</td>
+    </tr>
+</table>
+
+<div script-loader pagename="coolsites"></div>
