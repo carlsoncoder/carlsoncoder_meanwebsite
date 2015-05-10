@@ -47,7 +47,7 @@ var options = {
 };
 module.exports = options;
 ```
-    + You will need to provide your own values for all of the above mentioned values.  Failure to add this file or provide values for all specified options will likely cause things to not work : )
++ You will need to provide your own values for all of the above mentioned values.  Failure to add this file or provide values for all specified options will likely cause things to not work : )
 
 ## Known Modifications
 + tinymce.js would give the following error:
