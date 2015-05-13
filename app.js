@@ -155,8 +155,11 @@ function logErrorToMongo(error) {
 var port = normalizePort(process.env.OPENSHIFT_NODEJS_PORT || '3000');
 app.set('port', port);
 
+var ipAddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+app.set('ipAddress', ipAddress);
+
 var server = http.createServer(app);
-server.listen(port);
+server.listen(port, ipAddress);
 server.on('error', onError);
 server.on('listening', onListening);
 
