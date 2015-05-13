@@ -4,6 +4,7 @@
   "description": "CarlsonCoder's blog website",
   "private": true,
   "author": "Justin Carlson <justin@carlsoncoder.com>",
+  "main" : "app.js",
   "scripts": {
     "start": "node app.js"
   },
