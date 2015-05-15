@@ -169,7 +169,7 @@ app.config([
             .state(
                 'previewblogpost',
                 {
-                    url: '/blog/validateblogpost',
+                    url: '/admin/validateblogpost',
                     templateUrl: 'templates/admin/previewblogpost.html',
                     controller: 'AdminController',
                     onEnter: ['$state', 'auth', function($state, auth) {

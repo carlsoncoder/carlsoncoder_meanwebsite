@@ -330,10 +330,11 @@ function IsNumber(numberToCheck) {
 /// Determines if an object is a number.
 /// </summary>
 /// <returns>True if the viewport is 'mobile' width, otherwise false.</returns>
-/// <remarks>768px is the default @grid-float-breakpoint that Bootstrap uses to switch into Mobile view.  If that is changed, this should be as well.</remarks>
+/// <remarks>1200px is the default @grid-float-breakpoint that Bootstrap uses to switch into Mobile view.  If that is changed, this should be as well.</remarks>
 function IsMobileViewPort() {
+    // NOTE: Bootstrap has been modified to have the @grid-float-breakpoint value be 1200px;
     var viewportWidth = GetViewPortWidth();
-    return viewportWidth < 768;
+    return viewportWidth < 1200;
 }
 
 /// <summary>

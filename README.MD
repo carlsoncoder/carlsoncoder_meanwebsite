@@ -52,7 +52,14 @@ module.exports = options;
 ## Known Modifications
 + tinymce.js would give the following error:
     + **TypeError: Cannot read property '$$phase' of null at updateView (tinymce.js:16)**
-    + Referenced [https://github.com/angular-ui/ui-tinymce/issues/82](https://github.com/angular-ui/ui-tinymce/issues/82) and manually updated the file at /bower_components/angular-ui-tinymce/src/tinymce.js as suggested
+    + Referenced [https://github.com/angular-ui/ui-tinymce/issues/82](https://github.com/angular-ui/ui-tinymce/issues/82) and manually updated the file at js/angular-ui-tinymce.js as suggested
+    + Note that I am NOT including this in bower as a result of these manual modifications
++ Bootstrap - 3.3.4
+    + Note that Bootstrap is not a bower module either - I manually modified this and grabbed it from here:
+    + [http://getbootstrap.com/customize/](http://getbootstrap.com/customize/)
+    + The only thing I changed was I set the "@grid-float-breakpoint" to 1200px;
+    + Settings used are bound to source control, in the /public/bootstrap/config.json file
+
     
 ## License
 This code is free of license, however, referenced 3rd party components are likely bound by their own terms and licenses.
