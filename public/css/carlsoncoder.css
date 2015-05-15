@@ -194,7 +194,8 @@ footer > p {
 }
 
 .familyImage {
-    margin-left:50px;
+    display: block;
+    margin: auto;
     padding-top:15px;
     padding-bottom:15px;
 }

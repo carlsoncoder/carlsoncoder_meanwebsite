@@ -1,6 +1,9 @@
 // change this to 'true' to get detailed debug output
 var shouldLogToConsole = false;
 
+// NOTE: Bootstrap has been modified to have the @grid-float-breakpoint value be 1200px - if that is changed, change this as well
+var bootstrap_grid_float_breakpoint_pixel_value = 1200;
+
 // initialize global variable used for Disqus
 var disqus_shortname;
 
@@ -330,11 +333,10 @@ function IsNumber(numberToCheck) {
 /// Determines if an object is a number.
 /// </summary>
 /// <returns>True if the viewport is 'mobile' width, otherwise false.</returns>
-/// <remarks>1200px is the default @grid-float-breakpoint that Bootstrap uses to switch into Mobile view.  If that is changed, this should be as well.</remarks>
 function IsMobileViewPort() {
-    // NOTE: Bootstrap has been modified to have the @grid-float-breakpoint value be 1200px;
+
     var viewportWidth = GetViewPortWidth();
-    return viewportWidth < 1200;
+    return viewportWidth < bootstrap_grid_float_breakpoint_pixel_value;
 }
 
 /// <summary>

@@ -88,6 +88,12 @@
                     }, 300);
                 });
 
+                $('.navbar-nav a:not(.dropdown-toggle)').on('click', function () {
+                    if (IsMobileViewPort()) {
+                        $(".navbar-toggle").click();
+                    }
+                });
+
                 // initialize the disqus_shortname variable (we set this on the server side with the EJS templating)
                 disqus_shortname = "<%= config_disqus_shortname %>";
 
