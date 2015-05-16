@@ -1,7 +1,7 @@
 body {
     padding: 50px;
     background-image: url("../img/myBackgroundImage.jpg");
-    font-family: monospace !important;
+    font-family: 'Ubuntu', sans-serif !important;
 }
 
 .bootstrapContentDiv {
@@ -9,6 +9,12 @@ body {
     -webkit-box-shadow: 0 0 2px black;
     box-shadow: 0 0 2px black;
     background-image: url("../img/Subtle-Dots-White-Tileable-pattern.jpg");
+}
+
+@media screen and (max-width: 760px) {
+    .nomobile {
+        display: none;
+    }
 }
 
 p {

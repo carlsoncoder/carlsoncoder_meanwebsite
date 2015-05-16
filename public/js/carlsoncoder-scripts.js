@@ -442,3 +442,39 @@ function DetermineNewSize(currentSize, maxSize) {
 
     return newSize;
 }
+
+/// <summary>
+/// Creates a new CacheContainer object used to store simple cache arrays in memory.
+/// </summary>
+/// <param name="cacheLength">The age of the cache, in milliseconds.</param>
+/// <returns>A new CacheContainer object.</returns>
+function CacheContainer(cacheLength) {
+    this.updatedOn = new Date();
+    this.cachedData = [];
+    this.cacheLengthInMs = cacheLength;
+    this.isValid = function() {
+        if (this.cachedData.length === 0) {
+            return false;
+        }
+
+        var diffInMilliSeconds = Math.floor((new Date() - this.updatedOn));
+        if (diffInMilliSeconds > this.cacheLengthInMs) {
+            // clear array
+            this.cachedData = [];
+            return false;
+        }
+
+        return true;
+    };
+
+    this.assignData = function(newData) {
+        this.updatedOn = new Date();
+        this.cachedData = newData;
+    };
+
+    this.clearCache = function() {
+        this.cachedData = [];
+    };
+
+    return this;
+}

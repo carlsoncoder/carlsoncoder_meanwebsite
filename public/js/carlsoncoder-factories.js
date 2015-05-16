@@ -1,13 +1,25 @@
 var carlsonCoderFactories = angular.module('carlsoncoder.factories', []);
+var oneHourInMs = 3600000;
+
+var cachedBlogEntries = new CacheContainer(oneHourInMs);
+var cachedCoolSites = new CacheContainer(oneHourInMs);
+var cachedImages = new CacheContainer(oneHourInMs);
 
 carlsonCoderFactories.factory('blogposts', ['$http', '$state', function($http, $state) {
     var blogPostFactory = {};
     blogPostFactory.blogPosts = [];
 
     blogPostFactory.getAll = function() {
-        return $http.get('/blog').success(function(data) {
-            angular.copy(data, blogPostFactory.blogPosts);
-        });
+
+        if (cachedBlogEntries.isValid()) {
+            blogPostFactory.blogPosts = cachedBlogEntries.cachedData;
+        }
+        else {
+            return $http.get('/blog').success(function(data) {
+                angular.copy(data, blogPostFactory.blogPosts);
+                cachedBlogEntries.assignData(blogPostFactory.blogPosts);
+            });
+        }
     };
 
     blogPostFactory.saveBlogPost = function(blogPost) {
@@ -32,6 +44,9 @@ carlsonCoderFactories.factory('blogposts', ['$http', '$state', function($http, $
             postToSave.linkPath = '';
         }
 
+        // clear cache when posting a new blog
+        cachedBlogEntries.clearCache();
+
         return $http.post('/blog/saveBlogPost', postToSave)
             .success(function(data) {
                 $state.go('home');
@@ -46,9 +61,15 @@ carlsonCoderFactories.factory('coolsites', ['$http', function($http) {
     coolSitesFactory.coolSites = [];
 
     coolSitesFactory.getAll = function() {
-        return $http.get('/coolsites').success(function(data) {
-            angular.copy(data, coolSitesFactory.coolSites);
-        });
+        if (cachedCoolSites.isValid()) {
+            coolSitesFactory.coolSites = cachedCoolSites.cachedData;
+        }
+        else {
+            return $http.get('/coolsites').success(function(data) {
+                angular.copy(data, coolSitesFactory.coolSites);
+                cachedCoolSites.assignData(coolSitesFactory.coolSites);
+            });
+        }
     };
 
     return coolSitesFactory;
@@ -59,16 +80,25 @@ carlsonCoderFactories.factory('images', ['$http', '$state', '$rootScope', 'Uploa
     imagesFactory.images = [];
 
     imagesFactory.getAll = function() {
-        return $http.get('/admin/allimages')
-            .success(function(data) {
-                angular.copy(data, imagesFactory.images);
-            });
+        if (cachedImages.isValid()) {
+            imagesFactory.images = cachedImages.cachedData;
+        }
+        else {
+            return $http.get('/admin/allimages')
+                .success(function(data) {
+                    angular.copy(data, imagesFactory.images);
+                    cachedImages.assignData(imagesFactory.images);
+                });
+        }
     };
 
     imagesFactory.uploadImage = function(fileToUpload, imageDetails, callback) {
         // these are normally set by the $httpInterceptor, however, this call is not using $http so we have to manually set them
         $rootScope.activeCalls += 1;
         $rootScope.loadingText = "Uploading Image...";
+
+        // clear the image cache on an upload
+        cachedImages.clearCache();
 
         Upload.upload({
             url: 'admin/uploadimage',
