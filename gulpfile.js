@@ -6,6 +6,7 @@ var jshint = require('gulp-jshint');
 var csslint = require('gulp-csslint');
 var stylish = require('jshint-stylish');
 var nodemon = require('gulp-nodemon');
+var less = require('gulp-less');
 var install = require('gulp-install');
 
 // Installation task
@@ -42,13 +43,22 @@ gulp.task('csslint', function() {
         .pipe(csslint.reporter(stylish));
 });
 
+// LESS compilation into CSS task
+gulp.task('less-compilation', function() {
+    gulp.src('./public/less/*.less')
+        .pipe(less({
+            paths: ['./public/less']
+        }))
+        .pipe(gulp.dest('./public/css'));
+});
+
 gulp.task('develop', function() {
     nodemon(
         {
             script: 'app.js',
-            ext: 'html js css json ejs',
+            ext: 'html js css json ejs less',
             ignore: ['gulpfile.js'],
-            tasks: ['jshint'],
+            tasks: ['less-compilation', 'jshint'],
             env: { 'NODE_ENV' : 'development'}
         })
         .on('restart', function() {
@@ -57,6 +67,6 @@ gulp.task('develop', function() {
 
 });
 
-gulp.task('default', ['install', 'jshint', 'develop'], function() {
+gulp.task('default', ['install', 'less-compilation', 'jshint', 'develop'], function() {
     console.log('Gulp Running!');
 });
