@@ -116,6 +116,7 @@ footer > p {
 .dateTable td,
 th {
   font-size: 1.2em;
+  text-decoration: underline;
 }
 .readMoreLink {
   font-size: 1.1em;

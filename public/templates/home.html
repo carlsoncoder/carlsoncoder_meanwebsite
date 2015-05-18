@@ -2,7 +2,6 @@
     <a class="blogTitleLink" ui-sref="specificBlogPost({fullLinkPath: post.linkPath })"><p class="blogTitle">{{post.title | decodeBlogTitle}}</p></a>
     <table class="dateTable">
         <tr>
-            <td width="4%"><img src="img/calendar_icon.png" /></td>
             <td width="70%">{{post.whenCreated | date:'MMMM dd, yyyy' | uppercase}}</td>
             <td width="25%"><a class="disqusCommentCount nomobile" data-disqus-identifier="{{post.uniqueIdentifier}}" href="http://www.carlsoncoder.com/#/blog/{{post.linkPath}}"></a></td>
         </tr>
