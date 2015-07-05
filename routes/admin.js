@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var exceptionRepository = require('../services/exceptionrepository');
+var colorManager = require('../services/colormanager');
 var jwt = require('express-jwt');
 var AWSService = require('../services/awsservice');
 var configOptions = require('../config/config.js');
@@ -40,6 +41,20 @@ router.post('/uploadimage', auth, function(req, res, next) {
         }
 
         return res.status(200).json({message: 'File upload process completed sucessfully!'});
+    });
+});
+
+router.post('/setcolor', auth, function(req, res, next) {
+    colorManager.setColor(req.body.hexColorCode, function() {
+        return res.status(200).json({message: 'Color set successfully!'});
+    });
+});
+
+router.get('/selectedcolor', function(req, res, next) {
+    colorManager.getSelectedColor(function(rgbString) {
+        res.writeHeader(200, {'Content-Type' : 'text/plain' });
+        res.write(rgbString);
+        res.end();
     });
 });
 

@@ -1,0 +1,17 @@
+<h2>Set Color Remotely</h2>
+
+<div data-ng-show="error" class="alert alert-danger row">
+    <span>{{ error }}</span>
+</div>
+
+<form data-ng-submit="validateColor()" style="margin-top:30px;">
+    <div class="form-group">
+        <p>Set Hex Color:</p>
+        <input type="text" class="form-control" placeholder="Hex Color Code" data-ng-model="selectedHexColorCode" />
+        <br />
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-primary">Set Color</button>
+</form>
+
+<div script-loader pagename="admin"></div>

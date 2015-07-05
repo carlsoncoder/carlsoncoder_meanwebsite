@@ -130,6 +130,22 @@ app.config([
                     }]
                 })
             .state(
+                'setcolor',
+                {
+                    url: '/admin/setcolor',
+                    templateUrl: 'templates/admin/setcolor.html',
+                    controller: 'AdminController',
+                    onEnter: ['$state', 'auth', function($state, auth) {
+                        if (!auth.isLoggedIn())
+                        {
+                            $state.go('login');
+                        }
+                    }],
+                    onExit: ['$rootScope', function($rootScope) {
+                        $rootScope.currentPageNumber = 0;
+                    }]
+                })
+            .state(
                 'uploadpicture',
                 {
                     url: '/admin/uploadpicture',

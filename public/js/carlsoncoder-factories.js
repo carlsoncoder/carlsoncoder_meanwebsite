@@ -171,3 +171,24 @@ carlsonCoderFactories.factory('auth', ['$http', '$window', function($http, $wind
 
     return authFactory;
 }]);
+
+carlsonCoderFactories.factory('colors', ['$http', function($http) {
+    var colorsFactory = {};
+
+    colorsFactory.setColor = function(hexColorString, callback) {
+        $http.post('/admin/setcolor', { hexColorCode: hexColorString})
+            .success(function(data, status) {
+                if (status === 500) {
+                    callback(false, data.toString());
+                }
+                else {
+                    callback(true, '');
+                }
+            })
+            .error(function(data, status) {
+                callback(false, data.toString());
+            });
+    };
+
+    return colorsFactory;
+}]);
