@@ -17,7 +17,7 @@ colorManager.setColor = function(hexColorCode, callback) {
 };
 
 colorManager.getSelectedColor = function(callback) {
-    return callback(selectedRGBString);
+    return callback('<' + selectedRGBString + '>');
 };
 
 module.exports = colorManager;
