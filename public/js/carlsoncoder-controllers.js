@@ -15,6 +15,7 @@ carlsonCoderControllers.controller('MainController', [
         // always clear this out when not in admin controller
         currentBlogPostToSave = null;
 
+        $scope.$state = $state;
         $scope.posts = blogposts.blogPosts;
         $scope.filteredBlogIds = [];
         $scope.isLoggedIn = auth.isLoggedIn;
@@ -230,6 +231,7 @@ carlsonCoderControllers.controller('AdminController', [
     'blogposts',
     'colors',
     function($scope, $state, images, blogposts, colors) {
+        $scope.$state = $state;
         $scope.newBlogPost = {};
         $scope.imageDetails = {};
         $scope.imageDetails.divisor = 8;
@@ -334,25 +336,19 @@ carlsonCoderControllers.controller('AdminController', [
         };
 
         $scope.validateColor = function() {
-            if (IsNullOrUndefined($scope.selectedHexColorCode) || $scope.selectedHexColorCode === '') {
+            if (IsNullOrUndefined(latestSelectedHexColor) || latestSelectedHexColor === '') {
                 $scope.error = 'You must enter a hex color code';
                 return;
             }
 
-            if (!$scope.selectedHexColorCode.startsWith('#')) {
-                $scope.error = 'Hex color codes must start with a # symbol';
-                return;
-            }
-
-            if ($scope.selectedHexColorCode.match(/^#[a-f0-9]{6}$/i) === null) {
+            if (latestSelectedHexColor.match(/^#[a-f0-9]{6}$/i) === null) {
                 $scope.error = 'Invalid Hex Color Code Entered: Must be in format #AAFF88';
                 return;
             }
 
-            colors.setColor($scope.selectedHexColorCode, function(status, msg) {
+            colors.setColor(latestSelectedHexColor, function(status, msg) {
                 if (status === true) {
-                    alert('Color Saved Successfully!');
-                    $state.go('admin');
+                    $scope.userMessage = { type: 'success', title: 'Set Color', message: 'Color Saved Successfully!', nextState: 'NONE'};
                 }
                 else {
                     $scope.errorMessage = 'Error saving color: ' + msg;
@@ -367,6 +363,7 @@ carlsonCoderControllers.controller('NavigationController', [
     '$state',
     'auth',
     function($scope, $state, auth) {
+        $scope.$state = $state;
         $scope.user = {};
 
         $scope.isLoggedIn = auth.isLoggedIn;
@@ -387,6 +384,37 @@ carlsonCoderControllers.controller('NavigationController', [
         $scope.logOut = function() {
             auth.logOut();
             $state.go('home');
+        };
+
+        $scope.changePassword = function() {
+            if (IsNullOrUndefined($scope.oldPassword) || $scope.oldPassword === '') {
+                $scope.errorMessage = 'You must enter the old password';
+                return;
+            }
+
+            if (IsNullOrUndefined($scope.newPassword) || $scope.newPassword === '') {
+                $scope.errorMessage = 'You must enter a new password';
+                return;
+            }
+
+            if (IsNullOrUndefined($scope.newPasswordConfirm) || $scope.newPasswordConfirm === '') {
+                $scope.errorMessage = 'You must confirm your new password';
+                return;
+            }
+
+            if ($scope.newPassword !== $scope.newPasswordConfirm) {
+                $scope.errorMessage = 'Your new passwords do not match - please re-enter';
+                return;
+            }
+
+            auth.changePassword($scope.oldPassword, $scope.newPassword, function(status, message) {
+                if (!status) {
+                    $scope.errorMessage = message;
+                }
+                else {
+                    $scope.userMessage = { type: 'success', title: 'Login Information', message: 'Password successfully changed!', nextState: 'home'};
+                }
+            });
         };
     }
 ]);

@@ -1,6 +1,8 @@
 // change this to 'true' to get detailed debug output
 var shouldLogToConsole = false;
 
+var latestSelectedHexColor;
+
 // NOTE: Bootstrap has been modified to have the @grid-float-breakpoint value be 1200px - if that is changed, change this as well
 var bootstrap_grid_float_breakpoint_pixel_value = 1200;
 
@@ -59,6 +61,19 @@ function initializeOnControllerLoad(sectionLinkID, shouldHighlight, isFullBlogPa
             initILightBox();
             resizeImages();
         }, 1000);
+    }
+
+    if (sectionLinkID === adminSectionLinkId) {
+        var colorPickerDiv = document.getElementById('color-picker');
+        if (!IsNullOrUndefined(colorPickerDiv)) {
+            ColorPicker(
+                document.getElementById('color-picker'),
+                function (hex, hsv, rgb) {
+                    latestSelectedHexColor = hex.toUpperCase();
+                    $('#colorDisplayDiv').css('background-color', hex);
+                    $('#selectedHexColor').text(hex.toUpperCase());
+                });
+        }
     }
 }
 

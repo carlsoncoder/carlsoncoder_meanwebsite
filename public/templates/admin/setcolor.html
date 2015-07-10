@@ -4,14 +4,15 @@
     <span>{{ error }}</span>
 </div>
 
-<form data-ng-submit="validateColor()" style="margin-top:30px;">
-    <div class="form-group">
-        <p>Set Hex Color:</p>
-        <input type="text" class="form-control" placeholder="Hex Color Code" data-ng-model="selectedHexColorCode" />
-        <br />
-    </div>
+<div id="colorDisplayDiv" class="alert row">
+    <span id="selectedHexColor"></span>
+</div>
 
-    <button type="submit" class="btn btn-lg btn-primary">Set Color</button>
-</form>
+<div id="color-picker" class="cp-default" style="margin-bottom:20px;"></div>
+
+<div style="clear:both;">
+    <button type="submit" class="btn btn-lg btn-primary" ng-click="validateColor()">Save Color</button>
+</div>
 
 <div script-loader pagename="admin"></div>
+<toastr-watcher></toastr-watcher>

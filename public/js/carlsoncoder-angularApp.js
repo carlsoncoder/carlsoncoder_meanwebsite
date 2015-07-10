@@ -213,6 +213,19 @@ app.config([
                     onExit: ['$rootScope', function($rootScope) {
                         $rootScope.currentPageNumber = 0;
                     }]
+                })
+            .state(
+                'changepassword',
+                {
+                    url: '/changepassword',
+                    templateUrl: 'templates/admin/changepassword.html',
+                    controller: 'NavigationController',
+                    onEnter: ['$state', 'auth', function($state, auth) {
+                        if (!auth.isLoggedIn())
+                        {
+                            $state.go('login');
+                        }
+                    }]
                 });
 
         $urlRouterProvider.otherwise('/');

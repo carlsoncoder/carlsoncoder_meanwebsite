@@ -90,3 +90,25 @@ carlsonCoderDirectives.directive('replaceAnchorTitle', function() {
         }
     };
 });
+
+carlsonCoderDirectives.directive('toastrWatcher', function() {
+    return {
+        restrict: 'E',
+        link: function(scope, element, attrs) {
+            scope.$watch('userMessage', function(newValue, oldValue) {
+                if (!IsNullOrUndefined(newValue) && !IsNullOrUndefined(newValue.message)) {
+                    if (newValue.type === 'success') {
+                        toastr.success(newValue.message, newValue.title);
+
+                        if (newValue.nextState !== 'NONE' && !IsNullOrUndefined(scope) && !IsNullOrUndefined(scope.$state)) {
+                            scope.$state.go(newValue.nextState);
+                        }
+                    }
+                    else {
+                        toastr.error(newValue.message, newValue.title);
+                    }
+                }
+            });
+        }
+    };
+});
