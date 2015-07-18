@@ -229,8 +229,7 @@ carlsonCoderControllers.controller('AdminController', [
     '$state',
     'images',
     'blogposts',
-    'colors',
-    function($scope, $state, images, blogposts, colors) {
+    function($scope, $state, images, blogposts) {
         $scope.$state = $state;
         $scope.newBlogPost = {};
         $scope.imageDetails = {};
@@ -331,27 +330,6 @@ carlsonCoderControllers.controller('AdminController', [
                 }
                 else {
                     $state.go('viewpictures');
-                }
-            });
-        };
-
-        $scope.validateColor = function() {
-            if (IsNullOrUndefined(latestSelectedHexColor) || latestSelectedHexColor === '') {
-                $scope.error = 'You must enter a hex color code';
-                return;
-            }
-
-            if (latestSelectedHexColor.match(/^#[a-f0-9]{6}$/i) === null) {
-                $scope.error = 'Invalid Hex Color Code Entered: Must be in format #AAFF88';
-                return;
-            }
-
-            colors.setColor(latestSelectedHexColor, function(status, msg) {
-                if (status === true) {
-                    $scope.userMessage = { type: 'success', title: 'Set Color', message: 'Color Saved Successfully!', nextState: 'NONE'};
-                }
-                else {
-                    $scope.errorMessage = 'Error saving color: ' + msg;
                 }
             });
         };

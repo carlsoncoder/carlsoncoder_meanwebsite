@@ -190,8 +190,8 @@ carlsonCoderFactories.factory('auth', ['$http', '$window', function($http, $wind
 carlsonCoderFactories.factory('colors', ['$http', function($http) {
     var colorsFactory = {};
 
-    colorsFactory.setColor = function(hexColorString, callback) {
-        $http.post('/admin/setcolor', { hexColorCode: hexColorString})
+    colorsFactory.setColor = function(rgb, callback) {
+        $http.post('/admin/setcolor', { rgb: rgb })
             .success(function(data, status) {
                 if (status === 500) {
                     callback(false, data.toString());

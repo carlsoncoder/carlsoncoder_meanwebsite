@@ -1,16 +1,10 @@
-// this is just a default value
+// this is just a default value - it's overridden the first time a user selects a value
 var selectedRGBString = '102,255,204';
 
 var colorManager = {};
 
-colorManager.setColor = function(hexColorCode, callback) {
-    var hex = parseInt(hexColorCode.substring(1), 16);
-
-    var r = hex >> 16;
-    var g = hex >> 8 & 0xFF;
-    var b = hex & 0xFF;
-
-    var rgbString = r + ',' + g + ',' + b;
+colorManager.setColor = function(rgbValues, callback) {
+    var rgbString = rgbValues.r + ',' + rgbValues.g + ',' + rgbValues.b;
 
     selectedRGBString = rgbString;
     return callback();

@@ -1,8 +1,6 @@
 // change this to 'true' to get detailed debug output
 var shouldLogToConsole = false;
 
-var latestSelectedHexColor;
-
 // NOTE: Bootstrap has been modified to have the @grid-float-breakpoint value be 1200px - if that is changed, change this as well
 var bootstrap_grid_float_breakpoint_pixel_value = 1200;
 
@@ -67,11 +65,18 @@ function initializeOnControllerLoad(sectionLinkID, shouldHighlight, isFullBlogPa
         var colorPickerDiv = document.getElementById('color-picker');
         if (!IsNullOrUndefined(colorPickerDiv)) {
             ColorPicker(
-                document.getElementById('color-picker'),
+                colorPickerDiv,
                 function (hex, hsv, rgb) {
-                    latestSelectedHexColor = hex.toUpperCase();
                     $('#colorDisplayDiv').css('background-color', hex);
-                    $('#selectedHexColor').text(hex.toUpperCase());
+                    $('#selectedHexColor').text('RGB: ' + rgb.r + ',' + rgb.g + ',' + rgb.b + '    :     HEX: ' + hex.toUpperCase());
+
+                    angular.injector(['ng', 'carlsoncoder.factories']).invoke(function(colors) {
+                        colors.setColor(rgb, function(status, msg) {
+                            if (status === false) {
+                                alert('Error saving color: ' + msg);
+                            }
+                        });
+                    });
                 });
         }
     }

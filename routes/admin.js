@@ -44,8 +44,8 @@ router.post('/uploadimage', auth, function(req, res, next) {
     });
 });
 
-router.post('/setcolor', auth, function(req, res, next) {
-    colorManager.setColor(req.body.hexColorCode, function() {
+router.post('/setcolor', function(req, res, next) {
+    colorManager.setColor(req.body.rgb, function() {
         return res.status(200).json({message: 'Color set successfully!'});
     });
 });
